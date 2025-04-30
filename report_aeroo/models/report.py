@@ -211,6 +211,7 @@ class ReportAeroo(models.Model):
                 raise UserError(_('Parser model %s not found on database.') % (rec.parser_model))
 
     def read(self, fields=None, load='_classic_read'):
+        # TODO vk: lock for arg
         # ugly hack to avoid report being read when we enter a view with report added on print menu
         if not fields:
             fields = list(self._fields)

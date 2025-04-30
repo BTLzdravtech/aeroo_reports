@@ -74,6 +74,7 @@ class DocsConfigInstaller(models.TransientModel):
 
     @api.model
     def default_get(self, allfields):
+        # TODO vk: what is this for
         icp = self.env['ir.config_parameter'].sudo()
         defaults = super(DocsConfigInstaller, self).default_get(allfields)
         enabled = icp.get_param('aeroo.docs_enabled')

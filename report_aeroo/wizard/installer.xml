@@ -7,6 +7,7 @@
       <field name="inherit_id" ref="base.res_config_installer"/>
       <field name="arch" type="xml">
           <data>
+              <!--                # TODO vk: lock for arg-->
                 <form position="attributes">
                     <attribute name="string">Configure DOCS service connection</attribute>
                 </form>
