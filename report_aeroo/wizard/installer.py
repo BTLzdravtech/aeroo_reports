@@ -75,22 +75,22 @@ class DocsConfigInstaller(models.TransientModel):
     @api.model
     def default_get(self, allfields):
         # DONETODO vk: what is this for
-        active_company = self.env.company  # api.model
-        if active_company and active_company.country_id == self.env.ref('base.ar'):
-            icp = self.env['ir.config_parameter'].sudo()
-            defaults = super(DocsConfigInstaller, self).default_get(allfields)
-            enabled = icp.get_param('aeroo.docs_enabled')
-            defaults['enabled'] = enabled == 'True' and True or False
-            defaults['host'] = icp.get_param('aeroo.docs_host') or 'localhost'
-            defaults['port'] = int(icp.get_param('aeroo.docs_port')) or 8989
-            defaults['auth_type'] = icp.get_param('aeroo.docs_auth_type') or False
-            defaults['username'] = icp.get_param('aeroo.docs_username') or \
-                'anonymous'
-            defaults['password'] = icp.get_param('aeroo.docs_password') or \
-                'anonymous'
-            return defaults
-        else:
-            return super().default_get(allfields)
+        # active_company = self.env.company  # api.model
+        # if active_company and active_company.country_id == self.env.ref('base.ar'):
+        icp = self.env['ir.config_parameter'].sudo()
+        defaults = super(DocsConfigInstaller, self).default_get(allfields)
+        enabled = icp.get_param('aeroo.docs_enabled')
+        defaults['enabled'] = enabled == 'True' and True or False
+        defaults['host'] = icp.get_param('aeroo.docs_host') or 'localhost'
+        defaults['port'] = int(icp.get_param('aeroo.docs_port')) or 8989
+        defaults['auth_type'] = icp.get_param('aeroo.docs_auth_type') or False
+        defaults['username'] = icp.get_param('aeroo.docs_username') or \
+            'anonymous'
+        defaults['password'] = icp.get_param('aeroo.docs_password') or \
+            'anonymous'
+        return defaults
+        # else:
+        #     return super().default_get(allfields)
 
     def check(self):
         icp = self.env['ir.config_parameter'].sudo()
@@ -137,3 +137,10 @@ class DocsConfigInstaller(models.TransientModel):
         result = act_obj.search([('id', '=', act_id)]).read()[0]
         result['res_id'] = self.id
         return result
+
+
+    # @api.model
+    # def get_view(self, view_id=None, view_type="form", **options):
+    #     if view_type == "form" and self.env.company.country_id == self.env.ref('base.ar'):
+    #         view_id = self.env.ref("report_aeroo.view_docs_config_installer_ar").id
+    #     return super().get_view(view_id=view_id, view_type=view_type, **options)
