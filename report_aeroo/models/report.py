@@ -211,7 +211,6 @@ class ReportAeroo(models.Model):
                 raise UserError(_('Parser model %s not found on database.') % (rec.parser_model))
 
     def read(self, fields=None, load='_classic_read'):
-        # DONETODO vk: lock for arg
         active_company = self.env.company
         if active_company and active_company.country_id == self.env.ref('base.ar'):
             # ugly hack to avoid report being read when we enter a view with report added on print menu

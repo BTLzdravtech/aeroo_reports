@@ -74,7 +74,7 @@ class DocsConfigInstaller(models.TransientModel):
 
     @api.model
     def default_get(self, allfields):
-        # DONETODO vk: what is this for
+        # TODO os: what password to we have in database?
         # active_company = self.env.company  # api.model
         # if active_company and active_company.country_id == self.env.ref('base.ar'):
         icp = self.env['ir.config_parameter'].sudo()
