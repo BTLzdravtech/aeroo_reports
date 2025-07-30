@@ -74,9 +74,9 @@ class DocsConfigInstaller(models.TransientModel):
 
     @api.model
     def default_get(self, allfields):
-        # TODO os: what password to we have in database?
-        # active_company = self.env.company  # api.model
-        # if active_company and active_company.country_id == self.env.ref('base.ar'):
+        # DONETODO os: what password to we have in database? I understand that these are the parameters to connect to the openoffice service to perform document format conversions provided by aeroo, if it is used
+        # and the parameters are in plain text to use them to connect to the service that receives them in plain text))
+
         icp = self.env['ir.config_parameter'].sudo()
         defaults = super(DocsConfigInstaller, self).default_get(allfields)
         enabled = icp.get_param('aeroo.docs_enabled')
