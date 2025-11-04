@@ -228,14 +228,15 @@ class ReportAeroo(models.Model):
                 raise UserError(_("Parser model %s not found on database.") % (rec.parser_model))
 
     def read(self, fields=None, load="_classic_read"):
-        # ugly hack to avoid report being read when we enter a view with report added on print menu
-        if not fields:
-            fields = list(self._fields)
-            fields.remove("report_data")
-            if "background_image" in fields:
-                fields.remove("background_image")
-            if "logo" in fields:
-                fields.remove("logo")
+        if self.env.company.country_code == 'AR':
+            # ugly hack to avoid report being read when we enter a view with report added on print menu
+            if not fields:
+                fields = list(self._fields)
+                fields.remove("report_data")
+                if "background_image" in fields:
+                    fields.remove("background_image")
+                if "logo" in fields:
+                    fields.remove("logo")
         return super().read(fields, load=load)
 
     @api.onchange("in_format")
