@@ -65,7 +65,9 @@ class ReportAeroo(models.Model):
     @api.model
     def _render_aeroo(self, report_ref, docids, data=None):
         report = self._get_report(report_ref)
-        report_parser = self.env[report.parser_model or "report.report_aeroo.abstract"]
+        env = self.env(su=False)
+        env[report.model].browse(docids or []).check_access("read")
+        report_parser = env[report.parser_model or "report.report_aeroo.abstract"]
         return report_parser.with_context(active_model=report.model, report_name=report.report_name).aeroo_report(
             docids, data
         )
